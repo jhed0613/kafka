@@ -19,7 +19,6 @@ public class KafkaConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-//    private final KafkaProperties kafkaProperties;
 
     // ProducerConfig 와 producerFactory 를 굳이 따로 구현하지않고 바로 리턴하게 해놨음 그래서 반환값은 <스트링, 스트링>
     @Bean

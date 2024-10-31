@@ -4,6 +4,8 @@ package com.example.d1023.controller;
 import com.example.d1023.service.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,10 @@ public class UserController {
 
     @GetMapping
     public String test() {
-        log.error("log~~log~~log~~");
+        log.debug("log~~log~~log~~");
+        log.info("~~~~LOG~~~~");
+        Log logger_info = LogFactory.getLog("INFO_LOG");
+        logger_info.debug("로그입니다~~~");
         return "Hello!";
     }
 

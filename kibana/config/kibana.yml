@@ -1,0 +1,8 @@
+# 키바나 설정파일
+server.name: kibana
+server.host: "0"
+# Elasticsearch 서버 정보
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+monitoring.ui.container.elasticsearch.enabled: true
+elasticsearch.username: "elastic"
+elasticsearch.password: "MyPw123"

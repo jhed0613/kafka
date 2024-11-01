@@ -1,29 +1,32 @@
 //package com.example.d1023.config;
 //
 //import co.elastic.clients.elasticsearch.ElasticsearchClient;
-//import org.springframework.boot.context.properties.EnableConfigurationProperties;
-//import org.springframework.context.annotation.Bean;
+//import co.elastic.clients.json.jackson.JacksonJsonpMapper;
+//import co.elastic.clients.transport.ElasticsearchTransport;
+//import co.elastic.clients.transport.rest_client.RestClientTransport;
+//import org.apache.http.Header;
+//import org.apache.http.HttpHost;
+//import org.apache.http.message.BasicHeader;
+//import org.elasticsearch.client.RestClient;
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.data.elasticsearch.client.elc.ElasticsearchClients;
-//import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
-//import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 //
 //@Configuration
-//@EnableElasticsearchRepositories(basePackages = "com.example.d1023.repository")
-//@EnableConfigurationProperties(ELKProperties.class)
-//public class ElasticsearchConfig extends ElasticsearchConfiguration {
+//public class ElasticsearchConfig {
+//    String serverUrl = "https://localhost:9200";
+//    String apiKey = "ZjQ4TzVwSUItYXFTZk9qaGlGTng6M2g0cDZLbkNUNHlYYjFOSjQ5TGFwUQ==";
 //
-//    private final ELKProperties elkProperties;
+//    // Create the low-level client
+//    RestClient restClient = RestClient
+//            .builder(HttpHost.create(serverUrl))
+//            .setDefaultHeaders(new Header[]{
+//                    new BasicHeader("Authorization", "ApiKey " + apiKey)
+//            })
+//            .build();
 //
-//    public ElasticSearchConfig(ELKProperties elkProperties) {
-//        this.elkProperties = elkProperties;
-//    }
+//    // Create the transport with a Jackson mapper
+//    ElasticsearchTransport transport = new RestClientTransport(
+//            restClient, new JacksonJsonpMapper());
 //
-//    @Override
-//    @Bean
-//    public ElasticsearchClient elasticsearchClient() {
-//        return ElasticsearchClients.builder()
-//                .connectedTo(elkProperties.getHost())
-//                .build();
-//    }
+//    // And create the API client
+//    ElasticsearchClient esClient = new ElasticsearchClient(transport);
 //}

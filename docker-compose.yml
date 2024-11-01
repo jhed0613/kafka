@@ -65,8 +65,10 @@ services:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:7.17.16
     ports:
-      - "5000:5000"
+      - "5000:5000/tcp"
       - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     volumes:
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     depends_on:

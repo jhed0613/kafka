@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    <property name="LOGS_ABSOLUTE_PATH" value="./elasticsearch/nodes/0/indices/" />
+<!--    <property name="LOGS_ABSOLUTE_PATH" value="./elasticsearch/nodes/0/indices/" />-->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -11,10 +11,24 @@
 
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <!-- 로그 스태시 주소 -->
-<!--        <destination>${LOGSTASH_URL:-localhost:5000}</destination>-->
-        <destination>logstash:5000</destination>
+        <destination>${LOGSTASH_URL:-localhost:5000}</destination>
+<!--        <destination>http://logstash:5000</destination>-->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-
+            <providers>
+                <mdc />
+                <pattern>
+                    <pattern>{"server":"SampleServer"}</pattern>
+                </pattern>
+                <timestamp />
+                <context />
+                <threadName />
+                <loggerName />
+                <logLevel />
+                <message />
+                <logstashMarkers />
+                <stackTrace />
+                <callerData />
+            </providers>
         </encoder>
     </appender>
 
@@ -23,7 +37,8 @@
         <appender-ref ref="LOGSTASH" />
     </logger>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOGSTASH" />
     </root>
 </configuration>

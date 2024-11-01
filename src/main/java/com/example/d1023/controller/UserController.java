@@ -19,12 +19,17 @@ public class UserController {
 
     @GetMapping
     public String test() {
-        log.debug("log~~log~~log~~");
-        log.info("~~~~LOG~~~~");
-        Log logger_info = LogFactory.getLog("INFO_LOG");
-        logger_info.debug("로그입니다~~~");
+        for (int i=0; i<10; i++) {
+            log.debug("log~~log~~log~~ {}", i);
+            log.info("~~~~LOG~~~~ {}", i);
+
+            // 커스텀 로거 사용
+            Log logger_info = LogFactory.getLog("INFO_LOG");
+            logger_info.debug("로그입니다~~~ " + i);
+        }
         return "Hello!";
     }
+
 
     @PostMapping
     public String sendMessage(@RequestParam("message") String message) {
